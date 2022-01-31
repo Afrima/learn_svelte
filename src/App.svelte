@@ -10,6 +10,7 @@
 <main>
 	<h1>Hello {name}, my age is {age}</h1>
 	<button on:click="{incremetAge}">Change age</button>
+	<input type="text" bind:value="{name}" />
 </main>
 
 <style>
