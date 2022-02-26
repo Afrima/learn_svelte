@@ -1,18 +1,21 @@
 <script lang="ts">
 	export let name:string; 
+	export let job: string;
+	export let description: string;
+	export let picurl: string;
 </script>
   <div class="contact-card">
 	<header>
 	  <div class="thumb">
-		<img src="" alt="" />
+		<img src={picurl} alt="" />
 	  </div>
 	  <div class="user-data">
 		<h1>{name}</h1>
-		<h2>Job Title</h2>
+		<h2>{job}</h2>
 	  </div>
 	</header>
 	<div class="description">
-	  <p>A short description</p>
+	  <p>{description}</p>
 	</div>
   </div>
   
