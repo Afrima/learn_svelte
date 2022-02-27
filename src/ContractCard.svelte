@@ -3,6 +3,8 @@
 	export let job: string;
 	export let description: string;
 	export let picurl: string;
+
+	const fixName = name;
 </script>
   <div class="contact-card">
 	<header>
@@ -10,7 +12,7 @@
 		<img src={picurl} alt="" />
 	  </div>
 	  <div class="user-data">
-		<h1>{name}</h1>
+		<h1>{name} / {fixName}</h1>
 		<h2>{job}</h2>
 	  </div>
 	</header>
