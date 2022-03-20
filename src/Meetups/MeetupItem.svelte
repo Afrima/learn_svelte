@@ -1,3 +1,15 @@
+<script lang="ts">
+  export let address: string;
+  export let contactEmail: string;
+  export let subtitle: string;
+  export let imageUrl: string;
+  export let description: string;
+  export let id: string;
+  export let title: string;
+  console.log('render!', id);
+
+</script>
+
 <style>
   article {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -53,17 +65,20 @@
 </style>
 
 <article>
+  {console.log(id, subtitle)}
   <header>
-    <h1>TITLE</h1>
-    <h2>SUBTITLE</h2>
+    <h1>{title}</h1>
+    <h2>{subtitle}</h2>
+    <h3>{address}</h3>
   </header>
   <div class="image">
-    <img src="" alt="" />
+    <img src={imageUrl} alt="image" />
   </div>
   <div class="content">
-    <p />
+    <p>{description}</p>
   </div>
   <footer>
+    <a href="mailto:{contactEmail}"></a>
     <button>Show Details</button>
     <button>Favorite</button>
   </footer>

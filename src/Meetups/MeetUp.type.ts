@@ -5,7 +5,7 @@ type MeetUp = {
   readonly imageUrl: string;
   readonly description: string;
   readonly id: string;
-  readonly title: string
+  readonly title: string;
 };
 
 export default MeetUp;

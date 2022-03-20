@@ -3,7 +3,9 @@
   import MeetupItem from "./Meetups/MeetupItem.svelte";
   import type MeetUp from "./Meetups/MeetUp.type";
 
-  const meetups: Set<MeetUp> = new Set([
+  let number: number = 0;
+
+  let meetups: Set<MeetUp> = new Set([
     {
       id: "m1",
       title: "Coding Bootcamp",
@@ -26,6 +28,10 @@
       contactEmail: "swim@test.com"
     }
   ]);
+  const updateNumber = () => {
+    number += 1;
+    meetups = new Set([{...Array.from(meetups)[0], subtitle: number + ''}, Array.from(meetups)[1]]);
+  }
 </script>
 <style>
   .meet-ups {
@@ -34,7 +40,9 @@
 </style>
 <Header/>
 <section class="meet-ups">
-    {#each Array.from(meetups) as meetup}
-        <MeetupItem/>
+    {number}
+    <button on:click={updateNumber}>test</button>
+    {#each Array.from(meetups) as meetup, id}
+        <MeetupItem {...meetup}/>
     {/each}
 </section>
