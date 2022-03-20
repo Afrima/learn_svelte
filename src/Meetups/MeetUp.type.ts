@@ -1,4 +1,4 @@
-export type MeetUp = {
+type MeetUp = {
   readonly address: string;
   readonly contactEmail: string;
   readonly subtitle: string;
@@ -7,3 +7,5 @@ export type MeetUp = {
   readonly id: string;
   readonly title: string
 };
+
+export default MeetUp;

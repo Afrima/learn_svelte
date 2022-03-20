@@ -1,7 +1,7 @@
 <script lang="ts">
   import Header from "./UI/Header.svelte";
   import MeetupItem from "./Meetups/MeetupItem.svelte";
-  import type {MeetUp} from "./Meetups/MeetUp.type";
+  import type MeetUp from "./Meetups/MeetUp.type";
 
   const meetups: Set<MeetUp> = new Set([
     {
@@ -27,9 +27,14 @@
     }
   ]);
 </script>
-
+<style>
+  .meet-ups {
+    margin-top: 5rem;
+  }
+</style>
 <Header/>
-
-{#each Array.from(meetups) as meetup}
-    <MeetupItem/>
-{/each}
+<section class="meet-ups">
+    {#each Array.from(meetups) as meetup}
+        <MeetupItem/>
+    {/each}
+</section>
