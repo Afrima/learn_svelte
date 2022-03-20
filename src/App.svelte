@@ -1,53 +1,35 @@
 <script lang="ts">
-	import ContactCard from './ContractCard.svelte';
-	type card = {
-		readonly name: string;
-		readonly job: string;
-		readonly description: string;
-		readonly picUrl: string;
-	}
+  import Header from "./UI/Header.svelte";
+  import MeetupItem from "./Meetups/MeetupItem.svelte";
+  import type {MeetUp} from "./Meetups/MeetUp.type";
 
-	let name = 'Mathieu';
-	let job = '';
-	let description = '';
-	let picurl = '';
-	let cards: card[] = [];
-	const addCard = () => {
-		cards = [...cards,{
-			name: name,
-			job: job,
-			description: description,
-			picUrl: picurl
-		}];
-		name = '';
-		job = '';
-		description = '';
-		picurl = '';
-	}
-
-	const remove = (index:number) => {
-		cards = [...cards.slice(0, index), ...cards.slice(index+1, cards.length)]
-	}
+  const meetups: Set<MeetUp> = new Set([
+    {
+      id: "m1",
+      title: "Coding Bootcamp",
+      subtitle: "Learn to code in 2 hours",
+      description:
+        "In this meetup, we will have some experts that teach you how to code!",
+      imageUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Caffe_Nero_coffee_bar%2C_High_St%2C_Sutton%2C_Surrey%2C_Greater_London.JPG/800px-Caffe_Nero_coffee_bar%2C_High_St%2C_Sutton%2C_Surrey%2C_Greater_London.JPG",
+      address: "27th Nerd Road, 32523 New York",
+      contactEmail: "code@test.com"
+    },
+    {
+      id: "m2",
+      title: "Swim Together",
+      subtitle: "Let's go for some swimming",
+      description: "We will simply swim some rounds!",
+      imageUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Olympic_swimming_pool_%28Tbilisi%29.jpg/800px-Olympic_swimming_pool_%28Tbilisi%29.jpg",
+      address: "27th Nerd Road, 32523 New York",
+      contactEmail: "swim@test.com"
+    }
+  ]);
 </script>
 
+<Header/>
 
-<p for="name">Name:</p>
-<input id="name" type="text" bind:value="{name}" />
-<p for="job">Job:</p>
-<input id="job" type="text" bind:value="{job}" />
-<p for="desc">Desc:</p>
-<input id="desc" type="text" bind:value="{description}"/>
-<p for="pic">Pic:</p>
-<input id="pic" type="text" bind:value="{picurl}" />
-<button on:click="{addCard}">Add Card</button>
-{#each cards as card, i (card.name)}
-<ContactCard name={card.name} job={card.job} description={card.description} picurl={card.picUrl}/>
-<button on:click="{()=>remove(i)}">Remove Card</button>
+{#each Array.from(meetups) as meetup}
+    <MeetupItem/>
 {/each}
-
-
-<style>
-	h1{
-		color: purple;
-	}
-</style>
