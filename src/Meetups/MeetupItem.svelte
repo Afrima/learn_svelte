@@ -4,10 +4,7 @@
   export let subtitle: string;
   export let imageUrl: string;
   export let description: string;
-  export let id: string;
   export let title: string;
-  console.log('render!', id);
-
 </script>
 
 <style>
@@ -41,13 +38,6 @@
     font-family: "Roboto Slab", sans-serif;
   }
 
-  h1.is-favorite {
-    background: #01a129;
-    color: white;
-    padding: 0 0.5rem;
-    border-radius: 5px;
-  }
-
   h2 {
     font-size: 1rem;
     color: #808080;
@@ -65,7 +55,6 @@
 </style>
 
 <article>
-  {console.log(id, subtitle)}
   <header>
     <h1>{title}</h1>
     <h2>{subtitle}</h2>
