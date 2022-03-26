@@ -1,6 +1,7 @@
 <script lang="ts">
   export let id: string;
-  export let type: 'url' | 'email' | 'text' | 'number';
+  export let type: 'url' | 'email' | 'text' | 'number' | null = null;
+  export let rows: number | null = null;
   export let required: boolean | undefined;
   export let name: string;
   export let value: string;
@@ -43,7 +44,7 @@
 <div class="form-control">
     <label for={id}>{name}</label>
     {#if inputType === 'textarea'}
-        <textarea rows="3" id={id} on:input {required}>{value}</textarea>
+        <textarea rows={rows} id={id} on:input {required}>{value}</textarea>
     {:else}
         <input type={type} id={id} value={value} on:input {required}/>
     {/if}

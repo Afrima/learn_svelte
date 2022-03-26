@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let type: 'submit' | 'button';
+  export let type: 'submit' | 'button' | null = null;
   export let caption: string;
-  export let href: string | undefined;
-  export let mode: 'outline' | 'success' | undefined;
+  export let href: string | null = null;
+  export let mode: 'outline' | 'success' | null = null;
 </script>
 
 <style>

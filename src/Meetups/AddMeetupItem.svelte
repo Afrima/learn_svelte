@@ -87,9 +87,9 @@
     <TextInput
             id="description"
             name="Description"
-            type="email"
             value={description}
             inputType="textarea"
+            rows=3
             on:input={e => description = e.target.value}
             required
     />
