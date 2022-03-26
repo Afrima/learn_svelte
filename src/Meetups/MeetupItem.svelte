@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from '../UI/Button.svelte';
+  import {beforeUpdate} from "svelte";
 
   export let id: number;
   export let address: string;
@@ -8,6 +9,10 @@
   export let imageUrl: string;
   export let description: string;
   export let title: string;
+
+  beforeUpdate(()=>{
+    console.log(new Date().toLocaleTimeString()+' render item', id);
+  })
 </script>
 
 <style>
