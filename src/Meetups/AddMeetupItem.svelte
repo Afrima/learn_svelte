@@ -45,7 +45,9 @@
             type="text"
             value={title}
             inputType="input"
-            on:input={e => title = e.target.value}
+            on:inputChange={(e) => {
+                title = e.detail;
+              }}
             required
     />
     <TextInput
@@ -54,7 +56,9 @@
             type="text"
             value={subtitle}
             inputType="input"
-            on:input={e => subtitle = e.target.value}
+            on:inputChange={(e) => {
+                subtitle = e.detail;
+              }}
             required
     />
     <TextInput
@@ -63,7 +67,9 @@
             type="text"
             value={address}
             inputType="input"
-            on:input={e => address = e.target.value}
+            on:inputChange={(e) => {
+                address = e.detail;
+              }}
             required
     />
     <TextInput
@@ -72,7 +78,9 @@
             type="url"
             value={imageUrl}
             inputType="input"
-            on:input={e => imageUrl = e.target.value}
+            on:inputChange={(e) => {
+                imageUrl = e.detail;
+              }}
             required
     />
     <TextInput
@@ -81,7 +89,9 @@
             type="email"
             value={contactEmail}
             inputType="input"
-            on:input={e => contactEmail = e.target.value}
+            on:inputChange={(e) => {
+                contactEmail = e.detail;
+              }}
             required
     />
     <TextInput
@@ -89,8 +99,10 @@
             name="Description"
             value={description}
             inputType="textarea"
-            rows=3
-            on:input={e => description = e.target.value}
+            rows={3}
+            on:inputChange={(e) => {
+                description = e.detail;
+              }}
             required
     />
     <Button type="submit" caption="Submit"/>

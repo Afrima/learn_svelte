@@ -1,4 +1,7 @@
 <script lang="ts">
+  import {createEventDispatcher} from 'svelte';
+
+  const dispatch = createEventDispatcher<{ inputChange: string }>();
   export let id: string;
   export let type: 'url' | 'email' | 'text' | 'number' | null = null;
   export let rows: number | null = null;
@@ -44,8 +47,8 @@
 <div class="form-control">
     <label for={id}>{name}</label>
     {#if inputType === 'textarea'}
-        <textarea rows={rows} id={id} on:input {required}>{value}</textarea>
+        <textarea rows={rows} id={id} on:input={(e)=> dispatch('inputChange', e.currentTarget.value)} {required}>{value}</textarea>
     {:else}
-        <input type={type} id={id} value={value} on:input {required}/>
+        <input type={type} id={id} value={value} on:input={(e)=> dispatch('inputChange', e.currentTarget.value)} {required}/>
     {/if}
 </div>
