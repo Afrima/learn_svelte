@@ -1,6 +1,7 @@
 <script lang="ts">
   import TextInput from '../UI/TextInput.svelte';
   import type MeetUp from "./MeetUp.type";
+  import Button from '../UI/Button.svelte';
 
   let address: string = '';
   let contactEmail: string = '';
@@ -92,5 +93,5 @@
             on:input={e => description = e.target.value}
             required
     />
-    <button type="submit">Submit</button>
+    <Button type="submit" caption="Submit"/>
 </form>

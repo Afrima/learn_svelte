@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Button from '../UI/Button.svelte';
+
   export let id: number;
   export let address: string;
   export let contactEmail: string;
@@ -56,20 +58,20 @@
 </style>
 
 <article id={id.toString()}>
-  <header>
-    <h1>{title}</h1>
-    <h2>{subtitle}</h2>
-    <h3>{address}</h3>
-  </header>
-  <div class="image">
-    <img src={imageUrl} alt="meet-place" />
-  </div>
-  <div class="content">
-    <p>{description}</p>
-  </div>
-  <footer>
-    <a href="mailto:{contactEmail}">{contactEmail}</a>
-    <button>Show Details</button>
-    <button>Favorite</button>
-  </footer>
+    <header>
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+        <h3>{address}</h3>
+    </header>
+    <div class="image">
+        <img src={imageUrl} alt="meet-place"/>
+    </div>
+    <div class="content">
+        <p>{description}</p>
+    </div>
+    <footer>
+        <Button href="mailto:{contactEmail}" caption={contactEmail}/>
+        <Button type="button" caption="Show Details"/>
+        <Button type="button" mode="outline" caption="Favorite"/>
+    </footer>
 </article>
