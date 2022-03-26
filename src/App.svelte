@@ -1,12 +1,12 @@
 <script lang="ts">
   import Header from "./UI/Header.svelte";
-  import MeetupItem from "./Meetups/MeetupItem.svelte";
   import type MeetUp from "./Meetups/MeetUp.type";
   import AddMeetupItem from './Meetups/AddMeetupItem.svelte';
+  import MeetupGrid from './Meetups/MeetupGrid.svelte';
 
   let meetups: MeetUp[] = [
     {
-      id: "m1",
+      id: 1,
       title: "Coding Bootcamp",
       subtitle: "Learn to code in 2 hours",
       description:
@@ -17,7 +17,7 @@
       contactEmail: "code@test.com"
     },
     {
-      id: "m2",
+      id: 2,
       title: "Swim Together",
       subtitle: "Let's go for some swimming",
       description: "We will simply swim some rounds!",
@@ -36,10 +36,6 @@
   }
 </script>
 <style>
-  .meet-ups {
-    margin-top: 5rem;
-  }
-
   .panel {
     margin-top: 5rem;
   }
@@ -47,9 +43,5 @@
 <Header/>
 <div class="panel">
     <AddMeetupItem onSubmit={addMeetup}/>
-    <section class="meet-ups">
-        {#each meetups as meetup, id}
-            <MeetupItem id={id} {...meetup}/>
-        {/each}
-    </section>
+    <MeetupGrid meetups={meetups} />
 </div>

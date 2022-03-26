@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let id: string;
+  export let id: number;
   export let address: string;
   export let contactEmail: string;
   export let subtitle: string;
@@ -55,7 +55,7 @@
   }
 </style>
 
-<article id={id}>
+<article id={id.toString()}>
   <header>
     <h1>{title}</h1>
     <h2>{subtitle}</h2>
