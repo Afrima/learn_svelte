@@ -2,10 +2,9 @@
   import Header from "./UI/Header.svelte";
   import MeetupItem from "./Meetups/MeetupItem.svelte";
   import type MeetUp from "./Meetups/MeetUp.type";
+  import AddMeetupItem from './Meetups/AddMeetupItem.svelte';
 
-  let number: number = 0;
-
-  let meetups: Set<MeetUp> = new Set([
+  let meetups: MeetUp[] = [
     {
       id: "m1",
       title: "Coding Bootcamp",
@@ -27,22 +26,30 @@
       address: "27th Nerd Road, 32523 New York",
       contactEmail: "swim@test.com"
     }
-  ]);
-  const updateNumber = () => {
-    number += 1;
-    meetups = new Set([{...Array.from(meetups)[0], subtitle: number + ''}, Array.from(meetups)[1]]);
+  ];
+
+  const addMeetup = (meetup: MeetUp) => {
+    meetups = [
+      meetup,
+      ...meetups
+    ];
   }
 </script>
 <style>
   .meet-ups {
     margin-top: 5rem;
   }
+
+  .panel {
+    margin-top: 5rem;
+  }
 </style>
 <Header/>
-<section class="meet-ups">
-    {number}
-    <button on:click={updateNumber}>test</button>
-    {#each Array.from(meetups) as meetup, id}
-        <MeetupItem {...meetup}/>
-    {/each}
-</section>
+<div class="panel">
+    <AddMeetupItem onSubmit={addMeetup}/>
+    <section class="meet-ups">
+        {#each meetups as meetup, id}
+            <MeetupItem id={id} {...meetup}/>
+        {/each}
+    </section>
+</div>

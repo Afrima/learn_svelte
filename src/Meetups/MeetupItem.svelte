@@ -1,4 +1,5 @@
 <script lang="ts">
+  export let id: string;
   export let address: string;
   export let contactEmail: string;
   export let subtitle: string;
@@ -54,20 +55,20 @@
   }
 </style>
 
-<article>
+<article id={id}>
   <header>
     <h1>{title}</h1>
     <h2>{subtitle}</h2>
     <h3>{address}</h3>
   </header>
   <div class="image">
-    <img src={imageUrl} alt="image" />
+    <img src={imageUrl} alt="meet-place" />
   </div>
   <div class="content">
     <p>{description}</p>
   </div>
   <footer>
-    <a href="mailto:{contactEmail}"></a>
+    <a href="mailto:{contactEmail}">{contactEmail}</a>
     <button>Show Details</button>
     <button>Favorite</button>
   </footer>
