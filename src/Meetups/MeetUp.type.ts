@@ -6,6 +6,7 @@ type MeetUp = {
   readonly description: string;
   readonly id: number;
   readonly title: string;
+  readonly isFavorite: boolean;
 };
 
 export default MeetUp;

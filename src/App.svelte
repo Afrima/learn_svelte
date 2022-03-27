@@ -14,7 +14,8 @@
       imageUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Caffe_Nero_coffee_bar%2C_High_St%2C_Sutton%2C_Surrey%2C_Greater_London.JPG/800px-Caffe_Nero_coffee_bar%2C_High_St%2C_Sutton%2C_Surrey%2C_Greater_London.JPG",
       address: "27th Nerd Road, 32523 New York",
-      contactEmail: "code@test.com"
+      contactEmail: "code@test.com",
+      isFavorite: false
     },
     {
       id: 2,
@@ -24,7 +25,8 @@
       imageUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Olympic_swimming_pool_%28Tbilisi%29.jpg/800px-Olympic_swimming_pool_%28Tbilisi%29.jpg",
       address: "27th Nerd Road, 32523 New York",
-      contactEmail: "swim@test.com"
+      contactEmail: "swim@test.com",
+      isFavorite: false
     }
   ];
 
@@ -34,6 +36,17 @@
       ...meetups
     ];
   }
+
+  const toggleFavorite = (e: CustomEvent<number>) => {
+    const toggleMeetupIndex = meetups.findIndex(meetup => meetup.id === e.detail);
+    if (toggleMeetupIndex >= 0) {
+      const meetupToChange = {...meetups[toggleMeetupIndex], isFavorite: !meetups[toggleMeetupIndex].isFavorite};
+      const meetupsCopy = [...meetups.map(meetup => ({...meetup}))];
+      meetupsCopy[toggleMeetupIndex] = meetupToChange;
+      meetups = meetupsCopy;
+    }
+  }
+
 </script>
 <style>
   .panel {
@@ -43,5 +56,5 @@
 <Header/>
 <div class="panel">
     <AddMeetupItem onSubmit={addMeetup}/>
-    <MeetupGrid meetups={meetups} />
+    <MeetupGrid meetups={meetups} on:toggleFavorite={toggleFavorite}/>
 </div>

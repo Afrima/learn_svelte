@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '../UI/Button.svelte';
-  import {beforeUpdate} from "svelte";
+  import {beforeUpdate, createEventDispatcher} from "svelte";
 
   export let id: number;
   export let address: string;
@@ -9,9 +9,12 @@
   export let imageUrl: string;
   export let description: string;
   export let title: string;
+  export let isFavorite: boolean;
 
-  beforeUpdate(()=>{
-    console.log(new Date().toLocaleTimeString()+' render item', id);
+  const dispatch = createEventDispatcher<{ toggleFavorite: number }>();
+
+  beforeUpdate(() => {
+    console.log(new Date().toLocaleTimeString() + ' render item', id);
   })
 </script>
 
@@ -40,6 +43,13 @@
     object-fit: cover;
   }
 
+  h1.isFavorite {
+    background: #01a129;
+    color: white;
+    padding: 0 0.5rem;
+    border-radius: 5px;
+  }
+
   h1 {
     font-size: 1.25rem;
     margin: 0.5rem 0;
@@ -64,7 +74,7 @@
 
 <article id={id.toString()}>
     <header>
-        <h1>{title}</h1>
+        <h1 class:isFavorite>{title}</h1>
         <h2>{subtitle}</h2>
         <h3>{address}</h3>
     </header>
@@ -77,6 +87,11 @@
     <footer>
         <Button href="mailto:{contactEmail}" caption={contactEmail}/>
         <Button type="button" caption="Show Details"/>
-        <Button type="button" mode="outline" caption="Favorite"/>
+        <Button
+                type="button"
+                mode="outline"
+                caption={isFavorite? 'un-favorite': 'favorite'}
+                on:click={()=> dispatch('toggleFavorite', id)}
+        />
     </footer>
 </article>

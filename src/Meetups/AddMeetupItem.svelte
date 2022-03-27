@@ -20,7 +20,8 @@
       imageUrl,
       description,
       contactEmail,
-      address
+      address,
+      isFavorite: false
     });
     address = '';
     contactEmail = '';
