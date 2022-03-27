@@ -8,6 +8,8 @@
     color: #ffffff;
     text-transform: uppercase;
     padding: 0 0.5rem;
+    font-family: 'lato', sans-serif;
+    font-size: 0.8rem;
   }
 </style>
 
