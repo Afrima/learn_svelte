@@ -1,6 +1,7 @@
 <script lang="ts">
   export let type: 'submit' | 'button' | null = null;
   export let caption: string;
+  export let color: 'success' | null = null;
   export let href: string | null = null;
   export let mode: 'outline' | 'success' | null = null;
 </script>
@@ -86,5 +87,5 @@
 {#if href}
     <a {href}>{caption}</a>
 {:else}
-    <button class="{mode}" {type} on:click>{caption}</button>
+    <button class="{mode} {color}" {type} on:click>{caption}</button>
 {/if}

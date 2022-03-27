@@ -90,6 +90,7 @@
         <Button
                 type="button"
                 mode="outline"
+                color={isFavorite? null: 'success'}
                 caption={isFavorite? 'un-favorite': 'favorite'}
                 on:click={()=> dispatch('toggleFavorite', id)}
         />
