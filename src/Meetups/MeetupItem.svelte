@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from '../UI/Button.svelte';
   import {beforeUpdate, createEventDispatcher} from "svelte";
+  import Badge from '../UI/Badge.svelte';
 
   export let id: number;
   export let address: string;
@@ -74,7 +75,12 @@
 
 <article id={id.toString()}>
     <header>
-        <h1 class:isFavorite>{title}</h1>
+        <h1 class:isFavorite>
+            {title}
+            {#if isFavorite}
+                <Badge>Favorite</Badge>
+            {/if}
+        </h1>
         <h2>{subtitle}</h2>
         <h3>{address}</h3>
     </header>
