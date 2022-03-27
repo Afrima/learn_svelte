@@ -61,7 +61,7 @@
 </style>
 <Header/>
 <div class="panel">
-    <Button on:click={toggleShowAddMeetup} caption={showAddMeetup? 'hide': 'show'}/>
+    <Button on:click={toggleShowAddMeetup}>{showAddMeetup ? 'hide' : 'show'}</Button>
     {#if showAddMeetup}
         <AddMeetupItem on:addMeetup={addMeetup}/>
     {/if}

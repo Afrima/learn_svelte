@@ -106,5 +106,5 @@
               }}
             required
     />
-    <Button type="submit" caption="Submit"/>
+    <Button type="submit">Submit</Button>
 </form>
