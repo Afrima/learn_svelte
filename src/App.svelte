@@ -3,7 +3,9 @@
   import type MeetUp from "./Meetups/MeetUp.type";
   import AddMeetupItem from './Meetups/AddMeetupItem.svelte';
   import MeetupGrid from './Meetups/MeetupGrid.svelte';
+  import Button from './UI/Button.svelte';
 
+  let showAddMeetup: boolean = false;
   let meetups: MeetUp[] = [
     {
       id: 1,
@@ -30,9 +32,9 @@
     }
   ];
 
-  const addMeetup = (meetup: MeetUp) => {
+  const addMeetup = (meetup: CustomEvent<MeetUp>) => {
     meetups = [
-      meetup,
+      meetup.detail,
       ...meetups
     ];
   }
@@ -47,6 +49,10 @@
     }
   }
 
+  const toggleShowAddMeetup = () => {
+    showAddMeetup = !showAddMeetup;
+  }
+
 </script>
 <style>
   .panel {
@@ -55,6 +61,9 @@
 </style>
 <Header/>
 <div class="panel">
-    <AddMeetupItem onSubmit={addMeetup}/>
+    <Button on:click={toggleShowAddMeetup} caption={showAddMeetup? 'hide': 'show'}/>
+    {#if showAddMeetup}
+        <AddMeetupItem on:addMeetup={addMeetup}/>
+    {/if}
     <MeetupGrid meetups={meetups} on:toggleFavorite={toggleFavorite}/>
 </div>

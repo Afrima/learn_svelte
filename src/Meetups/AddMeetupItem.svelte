@@ -2,6 +2,7 @@
   import TextInput from '../UI/TextInput.svelte';
   import type MeetUp from "./MeetUp.type";
   import Button from '../UI/Button.svelte';
+  import {createEventDispatcher} from "svelte";
 
   let address: string = '';
   let contactEmail: string = '';
@@ -9,11 +10,10 @@
   let imageUrl: string = '';
   let description: string = '';
   let title: string = '';
-  export let onSubmit: (meetup: MeetUp) => void;
-
+  const dispatch = createEventDispatcher<{ addMeetup: MeetUp }>();
 
   const addMeetup = () => {
-    onSubmit({
+    dispatch('addMeetup', {
       id: Math.random(),
       title,
       subtitle,
