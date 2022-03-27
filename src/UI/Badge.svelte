@@ -7,6 +7,7 @@
     background: #cf0056;
     color: #ffffff;
     text-transform: uppercase;
+    padding: 0 0.5rem;
   }
 </style>
 
