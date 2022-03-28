@@ -3,6 +3,7 @@
   export let color: 'success' | null = null;
   export let href: string | null = null;
   export let mode: 'outline' | 'success' | null = null;
+  export let form: string | null = null;
 </script>
 
 <style>
@@ -84,7 +85,11 @@
 </style>
 
 {#if href}
-    <a {href} class="{mode} {color}"><slot/></a>
+    <a {href} class="{mode} {color}">
+        <slot/>
+    </a>
 {:else}
-    <button class="{mode} {color}" {type} on:click><slot/></button>
+    <button form={form} class="{mode} {color}" {type} on:click>
+        <slot/>
+    </button>
 {/if}

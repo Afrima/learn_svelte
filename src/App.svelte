@@ -49,8 +49,11 @@
     }
   }
 
-  const toggleShowAddMeetup = () => {
-    showAddMeetup = !showAddMeetup;
+  const openAddMeetup = () => {
+    showAddMeetup = true;
+  }
+  const closeAddMeetup = () => {
+    showAddMeetup = false;
   }
 
 </script>
@@ -61,9 +64,9 @@
 </style>
 <Header/>
 <div class="panel">
-    <Button on:click={toggleShowAddMeetup}>{showAddMeetup ? 'hide' : 'show'}</Button>
+    <Button on:click={openAddMeetup}>{showAddMeetup ? 'hide' : 'show'}</Button>
     {#if showAddMeetup}
-        <AddMeetupItem on:addMeetup={addMeetup}/>
+        <AddMeetupItem on:addMeetup={addMeetup} on:cancel={closeAddMeetup}/>
     {/if}
     <MeetupGrid meetups={meetups} on:toggleFavorite={toggleFavorite}/>
 </div>
