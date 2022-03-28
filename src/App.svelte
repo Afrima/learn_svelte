@@ -61,10 +61,16 @@
   .panel {
     margin-top: 5rem;
   }
+
+  .meetup-controls {
+    margin: 1rem;
+  }
 </style>
 <Header/>
 <div class="panel">
-    <Button on:click={openAddMeetup}>{showAddMeetup ? 'hide' : 'show'}</Button>
+    <div class="meetup-controls">
+        <Button on:click={openAddMeetup}>New Meetup</Button>
+    </div>
     {#if showAddMeetup}
         <AddMeetupItem on:addMeetup={addMeetup} on:cancel={closeAddMeetup}/>
     {/if}
