@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '../UI/Button.svelte';
-  import {beforeUpdate, createEventDispatcher} from "svelte";
+  import {createEventDispatcher} from "svelte";
   import Badge from '../UI/Badge.svelte';
 
   export let id: number;
@@ -13,10 +13,6 @@
   export let isFavorite: boolean;
 
   const dispatch = createEventDispatcher<{ toggleFavorite: number }>();
-
-  beforeUpdate(() => {
-    console.log(new Date().toLocaleTimeString() + ' render item', id);
-  })
 </script>
 
 <style>

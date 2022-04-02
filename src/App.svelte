@@ -4,49 +4,16 @@
   import AddMeetupItem from './Meetups/AddMeetupItem.svelte';
   import MeetupGrid from './Meetups/MeetupGrid.svelte';
   import Button from './UI/Button.svelte';
+  import meetupsStore from './Meetups/MeetupStore';
 
   let showAddMeetup: boolean = false;
-  let meetups: MeetUp[] = [
-    {
-      id: 1,
-      title: "Coding Bootcamp",
-      subtitle: "Learn to code in 2 hours",
-      description:
-        "In this meetup, we will have some experts that teach you how to code!",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Caffe_Nero_coffee_bar%2C_High_St%2C_Sutton%2C_Surrey%2C_Greater_London.JPG/800px-Caffe_Nero_coffee_bar%2C_High_St%2C_Sutton%2C_Surrey%2C_Greater_London.JPG",
-      address: "27th Nerd Road, 32523 New York",
-      contactEmail: "code@test.com",
-      isFavorite: false
-    },
-    {
-      id: 2,
-      title: "Swim Together",
-      subtitle: "Let's go for some swimming",
-      description: "We will simply swim some rounds!",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Olympic_swimming_pool_%28Tbilisi%29.jpg/800px-Olympic_swimming_pool_%28Tbilisi%29.jpg",
-      address: "27th Nerd Road, 32523 New York",
-      contactEmail: "swim@test.com",
-      isFavorite: false
-    }
-  ];
 
   const addMeetup = (meetup: CustomEvent<MeetUp>) => {
-    meetups = [
-      meetup.detail,
-      ...meetups
-    ];
+    meetupsStore.addMeetup(meetup.detail);
   }
 
   const toggleFavorite = (e: CustomEvent<number>) => {
-    const toggleMeetupIndex = meetups.findIndex(meetup => meetup.id === e.detail);
-    if (toggleMeetupIndex >= 0) {
-      const meetupToChange = {...meetups[toggleMeetupIndex], isFavorite: !meetups[toggleMeetupIndex].isFavorite};
-      const meetupsCopy = [...meetups.map(meetup => ({...meetup}))];
-      meetupsCopy[toggleMeetupIndex] = meetupToChange;
-      meetups = meetupsCopy;
-    }
+    meetupsStore.toggleFav(e.detail);
   }
 
   const openAddMeetup = () => {
@@ -74,5 +41,5 @@
     {#if showAddMeetup}
         <AddMeetupItem on:addMeetup={addMeetup} on:cancel={closeAddMeetup}/>
     {/if}
-    <MeetupGrid meetups={meetups} on:toggleFavorite={toggleFavorite}/>
+    <MeetupGrid meetups={$meetupsStore} on:toggleFavorite={toggleFavorite}/>
 </div>
