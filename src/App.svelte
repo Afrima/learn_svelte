@@ -1,20 +1,11 @@
 <script lang="ts">
   import Header from "./UI/Header.svelte";
-  import type MeetUp from "./Meetups/MeetUp.type";
   import AddMeetupItem from './Meetups/AddMeetupItem.svelte';
   import MeetupGrid from './Meetups/MeetupGrid.svelte';
   import Button from './UI/Button.svelte';
   import meetupsStore from './Meetups/MeetupStore';
 
   let showAddMeetup: boolean = false;
-
-  const addMeetup = (meetup: CustomEvent<MeetUp>) => {
-    meetupsStore.addMeetup(meetup.detail);
-  }
-
-  const toggleFavorite = (e: CustomEvent<number>) => {
-    meetupsStore.toggleFav(e.detail);
-  }
 
   const openAddMeetup = () => {
     showAddMeetup = true;
@@ -39,7 +30,7 @@
         <Button on:click={openAddMeetup}>New Meetup</Button>
     </div>
     {#if showAddMeetup}
-        <AddMeetupItem on:addMeetup={addMeetup} on:cancel={closeAddMeetup}/>
+        <AddMeetupItem on:cancel={closeAddMeetup}/>
     {/if}
-    <MeetupGrid meetups={$meetupsStore} on:toggleFavorite={toggleFavorite}/>
+    <MeetupGrid meetups={$meetupsStore}/>
 </div>

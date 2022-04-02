@@ -1,6 +1,6 @@
 <script lang="ts">
   import TextInput from '../UI/TextInput.svelte';
-  import type MeetUp from "./MeetUp.type";
+  import meetupStore from './MeetupStore';
   import Button from '../UI/Button.svelte';
   import {createEventDispatcher} from "svelte";
   import Modal from '../UI/Modal.svelte';
@@ -11,10 +11,10 @@
   let imageUrl: string = '';
   let description: string = '';
   let title: string = '';
-  const dispatch = createEventDispatcher<{ addMeetup: MeetUp; cancel: undefined }>();
+  const dispatch = createEventDispatcher<{ cancel: undefined }>();
 
   const addMeetup = () => {
-    dispatch('addMeetup', {
+    meetupStore.addMeetup({
       id: Math.random(),
       title,
       subtitle,
