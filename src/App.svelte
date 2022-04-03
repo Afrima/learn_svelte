@@ -1,53 +1,64 @@
 <script lang="ts">
-	import ContactCard from './ContractCard.svelte';
-	type card = {
-		readonly name: string;
-		readonly job: string;
-		readonly description: string;
-		readonly picUrl: string;
-	}
+  import Header from "./UI/Header.svelte";
+  import AddMeetupItem from "./Meetups/Items/AddMeetupItem.svelte";
+  import MeetupGrid from "./Meetups/Grid/MeetupGrid.svelte";
+  import meetupsStore from "./Meetups/MeetupStore";
+  import Page from "./Page";
+  import MeetupDetail from "./Meetups/Items/MeetupDetail.svelte";
+  import LoadingIndicator from "./UI/LoadingIndicator.svelte";
+  import { onMount } from "svelte";
+  import { getMeetups } from "./Rest/Http";
 
-	let name = 'Mathieu';
-	let job = '';
-	let description = '';
-	let picurl = '';
-	let cards: card[] = [];
-	const addCard = () => {
-		cards = [...cards,{
-			name: name,
-			job: job,
-			description: description,
-			picUrl: picurl
-		}];
-		name = '';
-		job = '';
-		description = '';
-		picurl = '';
-	}
+  let showAddMeetup: boolean = false;
+  let openPage = Page.GRID;
+  let detailId: string | null = null;
+  let editId: string | null = null;
 
-	const remove = (index:number) => {
-		cards = [...cards.slice(0, index), ...cards.slice(index+1, cards.length)]
-	}
+  onMount(() => {
+    getMeetups();
+  });
+
+  const openAddMeetup = (id: string | null) => {
+    editId = id;
+    showAddMeetup = true;
+  };
+
+  const closeAddMeetup = () => {
+    showAddMeetup = false;
+    editId = null;
+  };
+
+  const openMeetupDetail = (id: CustomEvent<string>) => {
+    detailId = id.detail;
+    openPage = Page.DETAIL;
+  };
+
+  const closeMeetupDetail = () => {
+    openPage = Page.GRID;
+    detailId = null;
+  };
 </script>
 
-
-<p for="name">Name:</p>
-<input id="name" type="text" bind:value="{name}" />
-<p for="job">Job:</p>
-<input id="job" type="text" bind:value="{job}" />
-<p for="desc">Desc:</p>
-<input id="desc" type="text" bind:value="{description}"/>
-<p for="pic">Pic:</p>
-<input id="pic" type="text" bind:value="{picurl}" />
-<button on:click="{addCard}">Add Card</button>
-{#each cards as card, i (card.name)}
-<ContactCard name={card.name} job={card.job} description={card.description} picurl={card.picUrl}/>
-<button on:click="{()=>remove(i)}">Remove Card</button>
-{/each}
-
+<LoadingIndicator />
+<Header />
+<div class="panel">
+  {#if openPage === Page.GRID}
+    {#if showAddMeetup}
+      <AddMeetupItem on:cancel={closeAddMeetup} objectId={editId} />
+    {/if}
+    <MeetupGrid
+      meetups={$meetupsStore}
+      on:openDetail={openMeetupDetail}
+      on:newMeetup={() => openAddMeetup(null)}
+      on:edit={(e) => openAddMeetup(e.detail)}
+    />
+  {:else if openPage === Page.DETAIL}
+    <MeetupDetail objectId={detailId} on:close={closeMeetupDetail} />
+  {/if}
+</div>
 
 <style>
-	h1{
-		color: purple;
-	}
+  .panel {
+    margin-top: 5rem;
+  }
 </style>
