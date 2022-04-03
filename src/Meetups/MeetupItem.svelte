@@ -1,8 +1,8 @@
 <script lang="ts">
-  import meetupStore from './MeetupStore';
-  import Button from '../UI/Button.svelte';
-  import Badge from '../UI/Badge.svelte';
-  import {createEventDispatcher} from 'svelte';
+  import meetupStore from "./MeetupStore";
+  import Button from "../UI/Button.svelte";
+  import Badge from "../UI/Badge.svelte";
+  import { createEventDispatcher } from "svelte";
 
   export let id: number;
   export let address: string;
@@ -13,9 +13,43 @@
   export let title: string;
   export let isFavorite: boolean;
 
-  const dispatch = createEventDispatcher<{openDetail: number}>();
-
+  const dispatch = createEventDispatcher<{ openDetail: number; edit: number }>();
 </script>
+
+<article id={id.toString()}>
+  <header>
+    <h1 class:isFavorite>
+      {title}
+      {#if isFavorite}
+        <Badge>Favorite</Badge>
+      {/if}
+    </h1>
+    <h2>{subtitle}</h2>
+    <h3>{address}</h3>
+  </header>
+  <div class="image">
+    <img src={imageUrl} alt="meet-place" />
+  </div>
+  <div class="content">
+    <p>{description}</p>
+  </div>
+  <footer>
+    <Button type="button" on:click={() => dispatch('edit', id)}>
+      Edit
+    </Button>
+    <Button type="button" on:click={() => dispatch("openDetail", id)}>
+      Show Details
+    </Button>
+    <Button
+      type="button"
+      mode="outline"
+      color={isFavorite ? null : "success"}
+      on:click={() => meetupStore.toggleFav(id)}
+    >
+      {isFavorite ? "un-favorite" : "favorite"}
+    </Button>
+  </footer>
+</article>
 
 <style>
   article {
@@ -70,38 +104,3 @@
     text-align: right;
   }
 </style>
-
-<article id={id.toString()}>
-    <header>
-        <h1 class:isFavorite>
-            {title}
-            {#if isFavorite}
-                <Badge>Favorite</Badge>
-            {/if}
-        </h1>
-        <h2>{subtitle}</h2>
-        <h3>{address}</h3>
-    </header>
-    <div class="image">
-        <img src={imageUrl} alt="meet-place"/>
-    </div>
-    <div class="content">
-        <p>{description}</p>
-    </div>
-    <footer>
-        <Button href="mailto:{contactEmail}">
-            {contactEmail}
-        </Button>
-        <Button type="button" on:click={()=> dispatch('openDetail', id)}>
-            Show Details
-        </Button>
-        <Button
-                type="button"
-                mode="outline"
-                color={isFavorite? null: 'success'}
-                on:click={()=> meetupStore.toggleFav(id)}
-        >
-            {isFavorite ? 'un-favorite' : 'favorite'}
-        </Button>
-    </footer>
-</article>

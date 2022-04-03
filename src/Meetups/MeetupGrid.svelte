@@ -22,6 +22,6 @@
 
 <section id="meetups">
     {#each meetups as meetup (meetup.id)}
-        <MeetupItem {...meetup} on:openDetail/>
+        <MeetupItem {...meetup} on:openDetail on:edit/>
     {/each}
 </section>
