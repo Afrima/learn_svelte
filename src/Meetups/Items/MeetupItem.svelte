@@ -19,7 +19,7 @@
 
 <article id={id.toString()}>
   <header>
-    <h1 class:isFavorite>
+    <h1>
       {title}
       {#if isFavorite}
         <Badge>Favorite</Badge>
@@ -74,13 +74,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  h1.isFavorite {
-    background: #01a129;
-    color: white;
-    padding: 0 0.5rem;
-    border-radius: 5px;
   }
 
   h1 {
