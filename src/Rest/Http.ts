@@ -25,7 +25,7 @@ export const getMeetups = async () => {
       description: meetup.description,
       title: meetup.title,
       isFavorite: meetup.isFavorite
-    })))
+    })).reverse())
   } catch (e) {
     console.error(e);
   } finally {
