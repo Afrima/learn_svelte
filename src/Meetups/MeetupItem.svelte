@@ -2,6 +2,7 @@
   import meetupStore from './MeetupStore';
   import Button from '../UI/Button.svelte';
   import Badge from '../UI/Badge.svelte';
+  import {createEventDispatcher} from 'svelte';
 
   export let id: number;
   export let address: string;
@@ -11,6 +12,9 @@
   export let description: string;
   export let title: string;
   export let isFavorite: boolean;
+
+  const dispatch = createEventDispatcher<{openDetail: number}>();
+
 </script>
 
 <style>
@@ -88,7 +92,7 @@
         <Button href="mailto:{contactEmail}">
             {contactEmail}
         </Button>
-        <Button type="button">
+        <Button type="button" on:click={()=> dispatch('openDetail', id)}>
             Show Details
         </Button>
         <Button
