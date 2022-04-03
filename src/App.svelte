@@ -11,14 +11,14 @@
 
   let showAddMeetup: boolean = false;
   let openPage = Page.GRID;
-  let detailId: number | null = null;
-  let editId: number | null = null;
+  let detailId: string | null = null;
+  let editId: string | null = null;
 
   onMount(() => {
     getMeetups();
   });
 
-  const openAddMeetup = (id: number | null) => {
+  const openAddMeetup = (id: string | null) => {
     editId = id;
     showAddMeetup = true;
   };
@@ -28,7 +28,7 @@
     editId = null;
   };
 
-  const openMeetupDetail = (id: CustomEvent<number>) => {
+  const openMeetupDetail = (id: CustomEvent<string>) => {
     detailId = id.detail;
     openPage = Page.DETAIL;
   };
@@ -44,7 +44,7 @@
 <div class="panel">
   {#if openPage === Page.GRID}
     {#if showAddMeetup}
-      <AddMeetupItem on:cancel={closeAddMeetup} id={editId} />
+      <AddMeetupItem on:cancel={closeAddMeetup} objectId={editId} />
     {/if}
     <MeetupGrid
       meetups={$meetupsStore}
@@ -53,7 +53,7 @@
       on:edit={(e) => openAddMeetup(e.detail)}
     />
   {:else if openPage === Page.DETAIL}
-    <MeetupDetail id={detailId} on:close={closeMeetupDetail} />
+    <MeetupDetail objectId={detailId} on:close={closeMeetupDetail} />
   {/if}
 </div>
 

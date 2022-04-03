@@ -26,8 +26,8 @@
 </section>
 
 <section class="meetups">
-  {#each filteredMeetups as meetup (meetup.id)}
-    <div transition:fade animate:flip={{duration: 500}}>
+  {#each filteredMeetups as meetup (meetup.objectId)}
+    <div transition:fade animate:flip={{ duration: 500 }}>
       <MeetupItem {...meetup} on:openDetail on:edit />
     </div>
   {/each}

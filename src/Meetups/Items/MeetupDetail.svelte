@@ -4,12 +4,12 @@
   import Button from "../../UI/Button.svelte";
   import type MeetUp from "../MeetUp.type";
 
-  export let id: string | null;
+  export let objectId: string | null;
 
   let selectedMeetup: MeetUp | undefined = undefined;
 
   const unsubscribe = meetups.subscribe((items) => {
-    const meetupFound = items.find((i) => i.id === id);
+    const meetupFound = items.find((i) => i.objectId === objectId);
     if (meetupFound !== undefined) {
       selectedMeetup = meetupFound;
     }

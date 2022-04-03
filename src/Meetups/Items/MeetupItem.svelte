@@ -3,8 +3,9 @@
   import Button from "../../UI/Button.svelte";
   import Badge from "../../UI/Badge.svelte";
   import { createEventDispatcher } from "svelte";
+  import { updateMeetup } from "../../Rest/Http";
 
-  export let id: string;
+  export let objectId: string;
   export let address: string;
   export let contactEmail: string;
   export let subtitle: string;
@@ -13,11 +14,27 @@
   export let title: string;
   export let isFavorite: boolean;
 
+  const setFav = (objectId: string) => {
+    const meet = $meetupStore.find((meetup) => meetup.objectId === objectId);
+    if (meet !== undefined) {
+      updateMeetup({
+        objectId: meet.objectId,
+        address: meet.address,
+        contactEmail: meet.contactEmail,
+        subtitle: meet.subtitle,
+        imageUrl: meet.imageUrl,
+        description: meet.description,
+        title: meet.title,
+        isFavorite: !meet.isFavorite,
+      });
+    }
+  };
+
   const dispatch =
-    createEventDispatcher<{ openDetail: number; edit: number }>();
+    createEventDispatcher<{ openDetail: string; edit: string }>();
 </script>
 
-<article id={id}>
+<article id={objectId}>
   <header>
     <h1>
       {title}
@@ -35,16 +52,18 @@
     <p>{description}</p>
   </div>
   <footer>
-    <Button type="button" on:click={() => dispatch("edit", id)}>Edit</Button>
+    <Button type="button" on:click={() => dispatch("edit", objectId)}
+      >Edit</Button
+    >
     <Button href="mailto:{contactEmail}">Contact</Button>
-    <Button type="button" on:click={() => dispatch("openDetail", id)}>
+    <Button type="button" on:click={() => dispatch("openDetail", objectId)}>
       Show Details
     </Button>
     <Button
       type="button"
       mode="outline"
       color={isFavorite ? null : "success"}
-      on:click={() => meetupStore.toggleFav(id)}
+      on:click={() => setFav(objectId)}
     >
       {isFavorite ? "un-favorite" : "favorite"}
     </Button>
