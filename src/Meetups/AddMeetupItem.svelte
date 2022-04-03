@@ -31,6 +31,11 @@
     unsubscribe();
   });
 
+  const deleteMeetup = (id: number) => {
+    meetupStore.deleteMeetup(id);
+    cancel();
+  };
+
   const addMeetup = () => {
     if (id === null) {
       meetupStore.addMeetup({
@@ -133,6 +138,9 @@
     />
   </form>
   <div slot="footer">
+    {#if id !== null}
+      <Button type="button" on:click={() => deleteMeetup(id)}>Delete</Button>
+    {/if}
     <Button mode="outline" type="button" on:click={cancel}>Cancel</Button>
     <Button form="add-meetup" type="submit">Submit</Button>
   </div>

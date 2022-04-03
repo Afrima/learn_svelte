@@ -40,6 +40,7 @@ export default {
             }
             return meetups;
         }),
+    deleteMeetup: (id: number) => meetupStore.update(meetups => meetups.filter(meetup => meetup.id !== id)),
     toggleFav: (idx: number) =>
         meetupStore.update(meetups => {
             const toggleMeetupIndex = meetups.findIndex(meetup => meetup.id === idx);
