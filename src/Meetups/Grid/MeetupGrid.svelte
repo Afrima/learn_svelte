@@ -5,7 +5,8 @@
   import Button from "../../UI/Button.svelte";
   import { FilterType } from "./FilterType";
   import { createEventDispatcher } from "svelte";
-
+  import { flip } from "svelte/animate";
+  import { fade } from "svelte/transition";
   export let meetups: MeetUp[];
 
   let filter: FilterType = FilterType.ALL;
@@ -26,7 +27,9 @@
 
 <section class="meetups">
   {#each filteredMeetups as meetup (meetup.id)}
-    <MeetupItem {...meetup} on:openDetail on:edit />
+    <div transition:fade animate:flip={{duration: 500}}>
+      <MeetupItem {...meetup} on:openDetail on:edit />
+    </div>
   {/each}
 </section>
 
