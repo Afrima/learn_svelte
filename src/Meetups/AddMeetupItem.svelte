@@ -4,7 +4,6 @@
   import Button from "../UI/Button.svelte";
   import { createEventDispatcher, onDestroy } from "svelte";
   import Modal from "../UI/Modal.svelte";
-  import meetups from "./MeetupStore";
 
   export let id: number | null;
 
@@ -16,7 +15,7 @@
   let title: string = "";
   const dispatch = createEventDispatcher<{ cancel: undefined }>();
 
-  const unsubscribe = meetups.subscribe((items) => {
+  const unsubscribe = meetupStore.subscribe((items) => {
     const meetupFound = items.find((i) => i.id === id);
     if (meetupFound !== undefined) {
       address = meetupFound.address;

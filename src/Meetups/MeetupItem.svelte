@@ -13,7 +13,8 @@
   export let title: string;
   export let isFavorite: boolean;
 
-  const dispatch = createEventDispatcher<{ openDetail: number; edit: number }>();
+  const dispatch =
+    createEventDispatcher<{ openDetail: number; edit: number }>();
 </script>
 
 <article id={id.toString()}>
@@ -34,9 +35,8 @@
     <p>{description}</p>
   </div>
   <footer>
-    <Button type="button" on:click={() => dispatch('edit', id)}>
-      Edit
-    </Button>
+    <Button type="button" on:click={() => dispatch("edit", id)}>Edit</Button>
+    <Button href="mailto:{contactEmail}">Contact</Button>
     <Button type="button" on:click={() => dispatch("openDetail", id)}>
       Show Details
     </Button>

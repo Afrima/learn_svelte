@@ -32,10 +32,10 @@ export default {
     addMeetup: (meetup: MeetUp) => meetupStore.update(meetups => [meetup, ...meetups]),
     updateMeetup: (meetup: MeetUp) =>
         meetupStore.update(meetups => {
-            const toggleMeetupIndex = meetups.findIndex(meetup => meetup.id === meetup.id);
-            if (toggleMeetupIndex >= 0) {
+            const meetupIndex = meetups.findIndex(meetup => meetup.id === meetup.id);
+            if (meetupIndex >= 0) {
                 const meetupsCopy = [...meetups.map(meetup => ({ ...meetup }))];
-                meetupsCopy[toggleMeetupIndex] = meetup;
+                meetupsCopy[meetupIndex] = meetup;
                 return meetupsCopy;
             }
             return meetups;
