@@ -5,7 +5,7 @@
   import { createEventDispatcher, onDestroy } from "svelte";
   import Modal from "../../UI/Modal.svelte";
 
-  export let id: number | null;
+  export let id: string | null;
 
   let address: string = "";
   let contactEmail: string = "";
@@ -30,7 +30,7 @@
     }
   }
 
-  const deleteMeetup = (id: number) => {
+  const deleteMeetup = (id: string) => {
     meetupStore.deleteMeetup(id);
     cancel();
   };
@@ -38,7 +38,7 @@
   const addMeetup = () => {
     if (id === null) {
       meetupStore.addMeetup({
-        id: Math.random(),
+        id: Math.random()+'',
         title,
         subtitle,
         imageUrl,

@@ -4,7 +4,7 @@
   import Badge from "../../UI/Badge.svelte";
   import { createEventDispatcher } from "svelte";
 
-  export let id: number;
+  export let id: string;
   export let address: string;
   export let contactEmail: string;
   export let subtitle: string;
@@ -17,7 +17,7 @@
     createEventDispatcher<{ openDetail: number; edit: number }>();
 </script>
 
-<article id={id.toString()}>
+<article id={id}>
   <header>
     <h1>
       {title}

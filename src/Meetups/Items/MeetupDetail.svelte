@@ -4,7 +4,7 @@
   import Button from "../../UI/Button.svelte";
   import type MeetUp from "../MeetUp.type";
 
-  export let id: number | null;
+  export let id: string | null;
 
   let selectedMeetup: MeetUp | undefined = undefined;
 

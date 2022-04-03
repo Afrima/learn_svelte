@@ -5,11 +5,18 @@
   import meetupsStore from "./Meetups/MeetupStore";
   import Page from "./Page";
   import MeetupDetail from "./Meetups/Items/MeetupDetail.svelte";
+  import LoadingIndicator from "./UI/LoadingIndicator.svelte";
+  import { onMount } from "svelte";
+  import { getMeetups } from "./Rest/Http";
 
   let showAddMeetup: boolean = false;
   let openPage = Page.GRID;
   let detailId: number | null = null;
   let editId: number | null = null;
+
+  onMount(() => {
+    getMeetups();
+  });
 
   const openAddMeetup = (id: number | null) => {
     editId = id;
@@ -32,6 +39,7 @@
   };
 </script>
 
+<LoadingIndicator />
 <Header />
 <div class="panel">
   {#if openPage === Page.GRID}

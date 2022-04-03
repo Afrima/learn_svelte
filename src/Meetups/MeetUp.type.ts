@@ -4,7 +4,7 @@ type MeetUp = {
   readonly subtitle: string;
   readonly imageUrl: string;
   readonly description: string;
-  readonly id: number;
+  readonly id: string;
   readonly title: string;
   readonly isFavorite: boolean;
 };
