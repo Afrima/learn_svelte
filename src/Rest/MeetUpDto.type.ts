@@ -1,4 +1,4 @@
-type MeetUp = {
+type MeetUpDto = {
   readonly objectId: string;
   readonly address: string;
   readonly contactEmail: string;
@@ -7,6 +7,8 @@ type MeetUp = {
   readonly description: string;
   readonly title: string;
   readonly isFavorite: boolean;
+  readonly createdAt: string;
+  readonly updatedAt: string;
 };
 
-export default MeetUp;
+export default MeetUpDto;

@@ -2,10 +2,11 @@
   import TextInput from "../../UI/TextInput.svelte";
   import meetupStore from "../MeetupStore";
   import Button from "../../UI/Button.svelte";
-  import { createEventDispatcher, onDestroy } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import Modal from "../../UI/Modal.svelte";
+  import { deleteMeetup, saveMeetup, updateMeetup } from "../../Rest/Http";
 
-  export let id: string | null;
+  export let objectId: string | null;
 
   let address: string = "";
   let contactEmail: string = "";
@@ -16,9 +17,9 @@
   let isFavorite: boolean = false;
   const dispatch = createEventDispatcher<{ cancel: undefined }>();
 
-  if (id !== null) {
+  if (objectId !== null) {
     const meetups = $meetupStore;
-    const meetupFound = meetups.find((i) => i.id === id);
+    const meetupFound = meetups.find((i) => i.objectId === objectId);
     if (meetupFound !== undefined) {
       address = meetupFound.address;
       contactEmail = meetupFound.contactEmail;
@@ -30,15 +31,14 @@
     }
   }
 
-  const deleteMeetup = (id: string) => {
-    meetupStore.deleteMeetup(id);
+  const delMeetup = (id: string) => {
+    deleteMeetup(id);
     cancel();
   };
 
   const addMeetup = () => {
-    if (id === null) {
-      meetupStore.addMeetup({
-        id: Math.random()+'',
+    if (objectId === null) {
+      saveMeetup({
         title,
         subtitle,
         imageUrl,
@@ -48,8 +48,8 @@
         isFavorite: false,
       });
     } else {
-      meetupStore.updateMeetup({
-        id,
+      updateMeetup({
+        objectId,
         title,
         subtitle,
         imageUrl,
@@ -137,8 +137,8 @@
     />
   </form>
   <div slot="footer">
-    {#if id !== null}
-      <Button type="button" on:click={() => deleteMeetup(id)}>Delete</Button>
+    {#if objectId !== null}
+      <Button type="button" on:click={() => delMeetup(objectId)}>Delete</Button>
     {/if}
     <Button mode="outline" type="button" on:click={cancel}>Cancel</Button>
     <Button form="add-meetup" type="submit">Submit</Button>
