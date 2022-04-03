@@ -1,14 +1,28 @@
 <script lang="ts">
-    import Button from './Button.svelte';
-    import {createEventDispatcher} from "svelte";
+  import Button from "./Button.svelte";
+  import { createEventDispatcher } from "svelte";
 
-    export let title: string;
+  export let title: string;
 
-    const dispatch = createEventDispatcher<{cancel:undefined}>();
-    const closeModal = () => {
-      dispatch('cancel');
-    }
+  const dispatch = createEventDispatcher<{ cancel: undefined }>();
+  const closeModal = () => {
+    dispatch("cancel");
+  };
 </script>
+
+<div class="modal-backdrop" on:click={closeModal} />
+<div class="modal">
+  <h1>{title}</h1>
+  <div class="content">
+    <slot />
+  </div>
+  <footer>
+    <slot name="footer">
+      <Button on:click={closeModal}>Close</Button>
+    </slot>
+  </footer>
+</div>
+
 <style>
   .modal-backdrop {
     position: fixed;
@@ -37,7 +51,7 @@
     padding: 1rem;
     margin: 0;
     border-bottom: 1px solid #ccc;
-    font-family: 'Roboto Slab', sans-serif;
+    font-family: "Roboto Slab", sans-serif;
   }
 
   .content {
@@ -55,16 +69,3 @@
     }
   }
 </style>
-
-<div class="modal-backdrop" on:click={closeModal}></div>
-<div class="modal">
-    <h1>{title}</h1>
-    <div class="content">
-        <slot/>
-    </div>
-    <footer>
-        <slot name="footer">
-            <Button on:click={closeModal}>Close</Button>
-        </slot>
-    </footer>
-</div>

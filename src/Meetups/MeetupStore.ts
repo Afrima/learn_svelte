@@ -35,7 +35,7 @@ export default {
             const meetupIndex = meetups.findIndex(meetup => meetup.id === meetup.id);
             if (meetupIndex >= 0) {
                 const meetupsCopy = [...meetups];
-                meetupsCopy[meetupIndex] = {...meetupsCopy[meetupIndex], ...meetup};
+                meetupsCopy[meetupIndex] = { ...meetupsCopy[meetupIndex], ...meetup };
                 return meetupsCopy;
             }
             return meetups;

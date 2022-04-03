@@ -1,10 +1,20 @@
 <script lang="ts">
-  export let type: 'submit' | 'button' | null = null;
-  export let color: 'success' | null = null;
+  export let type: "submit" | "button" | null = null;
+  export let color: "success" | null = null;
   export let href: string | null = null;
-  export let mode: 'outline' | 'success' | null = null;
+  export let mode: "outline" | "success" | null = null;
   export let form: string | null = null;
 </script>
+
+{#if href}
+  <a {href} class="{mode} {color}">
+    <slot />
+  </a>
+{:else}
+  <button {form} class="{mode} {color}" {type} on:click>
+    <slot />
+  </button>
+{/if}
 
 <style>
   button,
@@ -83,13 +93,3 @@
     background: #c2ffd1;
   }
 </style>
-
-{#if href}
-    <a {href} class="{mode} {color}">
-        <slot/>
-    </a>
-{:else}
-    <button form={form} class="{mode} {color}" {type} on:click>
-        <slot/>
-    </button>
-{/if}

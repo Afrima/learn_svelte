@@ -1,15 +1,35 @@
 <script lang="ts">
-  import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher<{ inputChange: string }>();
   export let id: string;
-  export let type: 'url' | 'email' | 'text' | 'number' | null = null;
+  export let type: "url" | "email" | "text" | "number" | null = null;
   export let rows: number | null = null;
   export let required: boolean | undefined;
   export let name: string;
   export let value: string;
-  export let inputType: 'input' | 'textarea';
+  export let inputType: "input" | "textarea";
 </script>
+
+<div class="form-control">
+  <label for={id}>{name}</label>
+  {#if inputType === "textarea"}
+    <textarea
+      {rows}
+      {id}
+      on:input={(e) => dispatch("inputChange", e.currentTarget.value)}
+      {required}>{value}</textarea
+    >
+  {:else}
+    <input
+      {type}
+      {id}
+      {value}
+      on:input={(e) => dispatch("inputChange", e.currentTarget.value)}
+      {required}
+    />
+  {/if}
+</div>
 
 <style>
   input,
@@ -43,12 +63,3 @@
     margin: 0.25rem 0;
   }
 </style>
-
-<div class="form-control">
-    <label for={id}>{name}</label>
-    {#if inputType === 'textarea'}
-        <textarea rows={rows} id={id} on:input={(e)=> dispatch('inputChange', e.currentTarget.value)} {required}>{value}</textarea>
-    {:else}
-        <input type={type} id={id} value={value} on:input={(e)=> dispatch('inputChange', e.currentTarget.value)} {required}/>
-    {/if}
-</div>
