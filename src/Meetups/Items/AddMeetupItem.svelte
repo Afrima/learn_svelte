@@ -1,9 +1,9 @@
 <script lang="ts">
-  import TextInput from "../UI/TextInput.svelte";
-  import meetupStore from "./MeetupStore";
-  import Button from "../UI/Button.svelte";
+  import TextInput from "../../UI/TextInput.svelte";
+  import meetupStore from "../MeetupStore";
+  import Button from "../../UI/Button.svelte";
   import { createEventDispatcher, onDestroy } from "svelte";
-  import Modal from "../UI/Modal.svelte";
+  import Modal from "../../UI/Modal.svelte";
 
   export let id: number | null;
 

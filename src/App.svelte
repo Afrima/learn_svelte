@@ -1,11 +1,11 @@
 <script lang="ts">
   import Header from "./UI/Header.svelte";
-  import AddMeetupItem from "./Meetups/AddMeetupItem.svelte";
-  import MeetupGrid from "./Meetups/MeetupGrid.svelte";
+  import AddMeetupItem from "./Meetups/Items/AddMeetupItem.svelte";
+  import MeetupGrid from "./Meetups/Grid/MeetupGrid.svelte";
   import Button from "./UI/Button.svelte";
   import meetupsStore from "./Meetups/MeetupStore";
   import Page from "./Page";
-  import MeetupDetail from "./Meetups/MeetupDetail.svelte";
+  import MeetupDetail from "./Meetups/Items/MeetupDetail.svelte";
 
   let showAddMeetup: boolean = false;
   let openPage = Page.GRID;

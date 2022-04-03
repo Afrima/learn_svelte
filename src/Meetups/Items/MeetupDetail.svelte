@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onDestroy, createEventDispatcher } from "svelte";
-  import meetups from "./MeetupStore";
-  import Button from "../UI/Button.svelte";
-  import type MeetUp from "./MeetUp.type";
+  import meetups from "../MeetupStore";
+  import Button from "../../UI/Button.svelte";
+  import type MeetUp from "../MeetUp.type";
 
   export let id: number | null;
 

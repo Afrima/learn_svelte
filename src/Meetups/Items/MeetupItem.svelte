@@ -1,7 +1,7 @@
 <script lang="ts">
-  import meetupStore from "./MeetupStore";
-  import Button from "../UI/Button.svelte";
-  import Badge from "../UI/Badge.svelte";
+  import meetupStore from "../MeetupStore";
+  import Button from "../../UI/Button.svelte";
+  import Badge from "../../UI/Badge.svelte";
   import { createEventDispatcher } from "svelte";
 
   export let id: number;
