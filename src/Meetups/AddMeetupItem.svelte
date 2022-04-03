@@ -13,10 +13,12 @@
   let imageUrl: string = "";
   let description: string = "";
   let title: string = "";
+  let isFavorite: boolean = false;
   const dispatch = createEventDispatcher<{ cancel: undefined }>();
 
-  const unsubscribe = meetupStore.subscribe((items) => {
-    const meetupFound = items.find((i) => i.id === id);
+  if (id !== null) {
+    const meetups = $meetupStore;
+    const meetupFound = meetups.find((i) => i.id === id);
     if (meetupFound !== undefined) {
       address = meetupFound.address;
       contactEmail = meetupFound.contactEmail;
@@ -24,12 +26,9 @@
       imageUrl = meetupFound.imageUrl;
       description = meetupFound.description;
       title = meetupFound.title;
+      isFavorite = meetupFound.isFavorite;
     }
-  });
-
-  onDestroy(() => {
-    unsubscribe();
-  });
+  }
 
   const deleteMeetup = (id: number) => {
     meetupStore.deleteMeetup(id);
@@ -57,7 +56,7 @@
         description,
         contactEmail,
         address,
-        isFavorite: false,
+        isFavorite,
       });
     }
     cancel();

@@ -34,8 +34,8 @@ export default {
         meetupStore.update(meetups => {
             const meetupIndex = meetups.findIndex(meetup => meetup.id === meetup.id);
             if (meetupIndex >= 0) {
-                const meetupsCopy = [...meetups.map(meetup => ({ ...meetup }))];
-                meetupsCopy[meetupIndex] = meetup;
+                const meetupsCopy = [...meetups];
+                meetupsCopy[meetupIndex] = {...meetupsCopy[meetupIndex], ...meetup};
                 return meetupsCopy;
             }
             return meetups;
@@ -46,7 +46,7 @@ export default {
             const toggleMeetupIndex = meetups.findIndex(meetup => meetup.id === idx);
             if (toggleMeetupIndex >= 0) {
                 const meetupToChange = { ...meetups[toggleMeetupIndex], isFavorite: !meetups[toggleMeetupIndex].isFavorite };
-                const meetupsCopy = [...meetups.map(meetup => ({ ...meetup }))];
+                const meetupsCopy = [...meetups];
                 meetupsCopy[toggleMeetupIndex] = meetupToChange;
                 return meetupsCopy;
             }
